@@ -1,13 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sozbayra <sozbayra@student.42istanbul.c    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/19 16:52:48 by sozbayra          #+#    #+#             */
+/*   Updated: 2023/06/19 16:52:48 by sozbayra         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include"so_long.h"
 #include<stdio.h>
+
 void	ft_exit(void *mlx, void *win){
 	mlx_destroy_window(mlx, win);
 	exit(0);
 }
 
-void	ft_exit_control(char **map, int player_y, int player_x, int collectibles, void *mlx, void *win){
-	if(map[player_y][player_x] == 'E' && collectibles == 0)
-		ft_exit(mlx, win);
+void	ft_exit_control(t_checker *checker, int player_y, int player_x)
+{
+	if (checker->map[checker->player_y][checker->player_x] == 'E'
+		&& checker->collectibles == 0)
+		ft_exit(checker->mlx, checker->win);
 }
 
 void	ft_generate_images(t_checker	*checker){
@@ -38,55 +53,34 @@ void	ft_generate_images(t_checker	*checker){
 	mlx_put_image_to_window(checker->mlx, checker->win, checker->exit_img, checker->exit_x * 48, checker->exit_y * 48);
 }
 
-void	ft_control_player_y(char **map, int player_y, int player_x, int indicator, t_checker *checker){
-	if(map[player_y][player_x] == '0' || map[player_y][player_x] == 'C')
-		{
-			if(map[player_y][player_x] == 'C')
-				checker->collectibles--;
-			map[player_y][player_x] = 'P';
-			map[checker->player_y][checker->player_x] = '0';
-			checker->player_y += indicator;
-			ft_generate_images(checker);
-		}
-}
-
-void	ft_control_player_x(char **map, int player_y, int player_x, int indicator, t_checker *checker){
-	if(map[player_y][player_x] == '0' || map[player_y][player_x] == 'C')
-		{
-			if(map[player_y][player_x] == 'C')
-				checker->collectibles--;
-			map[player_y][player_x] = 'P';
-			map[checker->player_y][checker->player_x] = '0';
-			checker->player_x += indicator;
-			ft_generate_images(checker);
-		}
-}
-
-int	ft_handle_keys(int keycode, t_checker *checker)
+void	ft_control_player_y(int player_y, int player_x, int indicator,
+		t_checker *checker)
 {
-	if(keycode==53)
-		ft_exit(checker->mlx, checker->win);
-	if(keycode == 13)
+	if (checker->map[player_y][player_x] == '0'
+		|| checker->map[player_y][player_x] == 'C')
 	{
-		ft_exit_control(checker->map, (checker->player_y - 1), checker->player_x, checker->collectibles, checker->mlx, checker->win);
-		ft_control_player_y(checker->map, (checker->player_y - 1), checker->player_x, -1, checker);
+		if (checker->map[player_y][player_x] == 'C')
+			checker->collectibles--;
+		checker->map[player_y][player_x] = 'P';
+		checker->map[checker->player_y][checker->player_x] = '0';
+		checker->player_y += indicator;
+		ft_generate_images(checker);
 	}
-	if(keycode == 1)
+}
+
+void	ft_control_player_x(int player_y, int player_x, int indicator,
+		t_checker *checker)
+{
+	if (checker->map[player_y][player_x] == '0'
+		|| checker->map[player_y][player_x] == 'C')
 	{
-		ft_exit_control(checker->map, (checker->player_y + 1), checker->player_x, checker->collectibles, checker->mlx, checker->win);
-		ft_control_player_y(checker->map, (checker->player_y + 1), checker->player_x, +1, checker);
+		if (checker->map[player_y][player_x] == 'C')
+			checker->collectibles--;
+		checker->map[player_y][player_x] = 'P';
+		checker->map[checker->player_y][checker->player_x] = '0';
+		checker->player_x += indicator;
+		ft_generate_images(checker);
 	}
-	if(keycode == 0)
-	{
-		ft_exit_control(checker->map, checker->player_y, (checker->player_x - 1), checker->collectibles, checker->mlx, checker->win);
-		ft_control_player_x(checker->map, checker->player_y, (checker->player_x - 1), -1, checker);
-	}
-	if(keycode == 2)
-	{
-		ft_exit_control(checker->map, checker->player_y, (checker->player_x + 1), checker->collectibles, checker->mlx, checker->win);
-		ft_control_player_x(checker->map, checker->player_y, (checker->player_x + 1), +1, checker);
-	}
-	return (0);
 }
 
 void	ft_draw_map(t_checker	*checker, char **map)

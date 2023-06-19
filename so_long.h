@@ -27,5 +27,22 @@ typedef struct t_checker
     int     exit_y;
 }   t_checker;
 
+typedef struct s_temp
+{
+    int		control;
+	char	*string;
+	int		matrix_i;
+	int		matrix_j;
+}   t_temp;
+
 void	ft_draw_map(t_checker	*checker, char **map);
+void    ft_check_valid_path_extension(t_checker *checker, int x_of_p, int y_of_p);
+void ft_check_valid_path(int x_of_p, int y_of_p, t_checker *checker);
+int	ft_handle_keys(int keycode, t_checker *checker);
+void	ft_control_player_y(int player_y, int player_x, int indicator,
+		t_checker *checker);
+void	ft_control_player_x(int player_y, int player_x, int indicator,
+		t_checker *checker);
+void	ft_exit_control(t_checker *checker, int player_y, int player_x);
+void	ft_exit(void *mlx, void *win);
 #endif
