@@ -6,14 +6,14 @@
 /*   By: sozbayra <sozbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 18:25:01 by sozbayra          #+#    #+#             */
-/*   Updated: 2023/06/19 19:43:19 by sozbayra         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:15:11 by sozbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
-# include "./get_next_line/get_next_line.h"
-# include "./minilibx/mlx.h"
+# include "../get_next_line/get_next_line.h"
+# include "../minilibx/mlx.h"
 # include <fcntl.h>
 
 typedef struct t_checker

@@ -6,7 +6,7 @@
 /*   By: sozbayra <sozbayra@student.42istanbul.c    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 16:52:48 by sozbayra          #+#    #+#             */
-/*   Updated: 2023/06/19 19:42:53 by sozbayra         ###   ########.fr       */
+/*   Updated: 2023/06/20 12:15:48 by sozbayra         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,17 +69,17 @@ void	ft_draw_map(t_checker *checker, char **map)
 	x = 48;
 	y = 48;
 	checker->background = mlx_xpm_file_to_image(checker->mlx,
-			"./tiles/grass-tile.xpm", &x, &y);
+			"../tiles/grass-tile.xpm", &x, &y);
 	checker->exit_img = mlx_xpm_file_to_image(checker->mlx,
-			"./tiles/exit_xpm.xpm", &x, &y);
+			"../tiles/exit_xpm.xpm", &x, &y);
 	checker->collectible = mlx_xpm_file_to_image(checker->mlx,
-			"./tiles/tube_xpm.xpm", &x, &y);
-	checker->wall = mlx_xpm_file_to_image(checker->mlx, "./tiles/wall.xpm", &x,
+			"../tiles/tube_xpm.xpm", &x, &y);
+	checker->wall = mlx_xpm_file_to_image(checker->mlx, "../tiles/wall.xpm", &x,
 			&y);
-	checker->hero1 = mlx_xpm_file_to_image(checker->mlx, "./tiles/char1.xpm",
+	checker->hero1 = mlx_xpm_file_to_image(checker->mlx, "../tiles/char1.xpm",
 			&x, &y);
-	hero2 = mlx_xpm_file_to_image(checker->mlx, "./tiles/char2.xpm", &x, &y);
-	hero3 = mlx_xpm_file_to_image(checker->mlx, "./tiles/char3.xpm", &x, &y);
+	hero2 = mlx_xpm_file_to_image(checker->mlx, "../tiles/char2.xpm", &x, &y);
+	hero3 = mlx_xpm_file_to_image(checker->mlx, "../tiles/char3.xpm", &x, &y);
 	ft_generate_images(checker);
 	mlx_hook(checker->win, 2, 1L << 0, ft_handle_keys, checker);
 	mlx_loop(checker->mlx);
